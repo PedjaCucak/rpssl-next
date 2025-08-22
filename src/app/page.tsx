@@ -6,13 +6,13 @@ import { useLoadChoices } from '@/hooks/useLoadChoices';
 import { GameChoiceGrid } from '@/components/GameChoiceGrid';
 import { Scoreboard } from '@/components/Scoreboard';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
+import { playRound } from '@/store/slices/gameSlice';
 import {
-  playRound,
   selectChoiceNameById,
   selectChoicesStatus,
   selectLastRound,
   selectPlayStatus,
-} from '@/store/slices/gameSlice';
+} from '@/store/selectors/gameSelectors';
 import { WinnerOverlay } from '@/components/WinnerOverlay';
 import { OverlayPhase } from '@/types/ui';
 import { detectOutcome } from '@/lib/gameOutcome';

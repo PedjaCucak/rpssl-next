@@ -1,11 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
-import {
-  fetchChoices,
-  fetchScoreboard,
-  selectChoicesStatus,
-} from '@/store/slices/gameSlice';
+import { fetchChoices, fetchScoreboard } from '@/store/slices/gameSlice';
 import { useApiErrorHandler } from './useApiErrorHandler';
 
 type Options = {
