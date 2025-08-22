@@ -24,13 +24,23 @@ import {
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { emojiFor } from "@/lib/gameIcons";
 import { outcomeColor } from "@/lib/gameOutcome";
+import { useApiErrorHandler } from "@/hooks/useApiErrorHandler";
 
 export const Scoreboard: React.FC = () => {
   const dispatch = useAppDispatch();
+  const handleApiError = useApiErrorHandler();
   const recent = useAppSelector(selectRecent);
   const getNameById = useAppSelector(selectChoiceNameById);
 
   const isResetDisabled = recent.length === 0;
+
+  const handleResetScoreboard = async () => {
+    try {
+      await dispatch(resetScoreboard());
+    } catch (err) {
+      handleApiError(err);
+    }
+  };
 
   const ItemChip: React.FC<{ id: number }> = ({ id }) => {
     const name = getNameById(id);
@@ -65,7 +75,7 @@ export const Scoreboard: React.FC = () => {
               <IconButton
                 aria-label="reset scoreboard"
                 size="small"
-                onClick={() => void dispatch(resetScoreboard())}
+                onClick={handleResetScoreboard}
                 disabled={isResetDisabled}
               >
                 <RestartAltIcon />
@@ -118,7 +128,7 @@ export const Scoreboard: React.FC = () => {
         <Button
           size="small"
           startIcon={<RestartAltIcon />}
-          onClick={() => void dispatch(resetScoreboard())}
+          onClick={handleResetScoreboard}
           disabled={isResetDisabled}
         >
           Reset

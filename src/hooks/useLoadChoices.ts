@@ -1,17 +1,37 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
 import { fetchChoices, fetchScoreboard, selectChoicesStatus } from '@/store/slices/gameSlice';
+import { useApiErrorHandler } from './useApiErrorHandler';
 
-export function useLoadChoices() {
+type Options = {
+  /** fire automatically on mount */
+  auto?: boolean;
+};
+
+export function useLoadChoices(options: Options = {}) {
+  const { auto = true } = options;
+
   const dispatch = useAppDispatch();
-  const status = useAppSelector(selectChoicesStatus);
+  const handleApiError = useApiErrorHandler();
+
+  const [loading, setLoading] = useState(false);
   const did = useRef(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    void dispatch(fetchChoices()).unwrap().catch(handleApiError).finally(() => {setLoading(false)});
+    void dispatch(fetchScoreboard()).unwrap().catch(handleApiError).finally(() => {setLoading(false)});
+  }, [dispatch, handleApiError]);
+
   useEffect(() => {
     if (did.current) return;
     did.current = true;
-    void dispatch(fetchChoices());
-    void dispatch(fetchScoreboard());
-  }, [dispatch]);
-  return { loading: status === 'loading' || status === 'idle' };
+    if (auto) void load();
+  }, [auto, load]);
+
+  return {
+    loading,
+    reload: load,
+  };
 }

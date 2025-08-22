@@ -10,3 +10,7 @@ export interface GameResultDto {
   player: ChoiceId;
   computer: ChoiceId;
 }
+
+export interface OkDto {
+  ok: boolean;
+}

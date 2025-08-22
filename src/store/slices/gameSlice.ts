@@ -14,7 +14,7 @@ type GameState = {
 
 const initialState: GameState = {
   choices: [],
-  choicesStatus: 'idle',
+  choicesStatus: 'loading',
   playStatus: 'idle',
   lastRound: undefined,
   recent: [],
@@ -29,8 +29,8 @@ export const fetchScoreboard = createAsyncThunk('game/scoreboard', async () => {
 });
 
 export const resetScoreboard = createAsyncThunk('game/resetScoreboard', async () => {
-  await api.resetScoreboard();
-  return [] as GameResult[];
+  const data = await api.resetScoreboard();
+  return data;
 });
 
 export const playRound = createAsyncThunk('game/play', async (choiceId: number) => {
@@ -48,7 +48,10 @@ const slice = createSlice({
 
     b.addCase(fetchScoreboard.fulfilled, (s, a) => { s.recent = a.payload.slice(0,10); });
 
-    b.addCase(resetScoreboard.fulfilled, (s) => { s.recent = []; });
+    b.addCase(resetScoreboard.fulfilled, (s, a) => { 
+      if (a.payload?.ok) {
+        s.recent = [];
+      } });
 
     b.addCase(playRound.pending, (s) => { s.playStatus = 'loading'; })
      .addCase(playRound.fulfilled, (s, a) => {

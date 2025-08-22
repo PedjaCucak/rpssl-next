@@ -16,10 +16,12 @@ import {
 import { WinnerOverlay } from "@/components/WinnerOverlay";
 import { OverlayPhase } from "@/types/ui";
 import { detectOutcome } from "@/lib/gameOutcome";
+import { useApiErrorHandler } from "@/hooks/useApiErrorHandler";
 
 export default function Home() {
-  const { loading } = useLoadChoices();
+  const { loading } = useLoadChoices({ auto: true });
   const dispatch = useAppDispatch();
+  const handleApiError = useApiErrorHandler();
 
   const lastRound = useAppSelector(selectLastRound);
   const playStatus = useAppSelector(selectPlayStatus);
@@ -39,9 +41,11 @@ export default function Home() {
       setOpen(true);
       try {
         await dispatch(playRound(id)).unwrap();
-      } catch (err) {}
+      } catch (err) {
+        handleApiError(err);
+      }
     },
-    [dispatch]
+    [dispatch, handleApiError]
   );
 
   useEffect(() => {

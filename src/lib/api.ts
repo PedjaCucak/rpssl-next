@@ -1,27 +1,21 @@
-import type { ChoiceDto, GameResultDto } from '@/types/dto';
-
-async function j<T>(res: Response): Promise<T> {
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  return res.json() as Promise<T>;
-}
+import type { ChoiceDto, GameResultDto, OkDto } from '@/types/dto';
+import { API } from './http';
 
 export const api = {
   async getChoices(): Promise<ChoiceDto[]> {
-    return j(await fetch('/api/choices', { cache: 'no-store' }));
+    const res = await API.get<ChoiceDto[]>('/choices');
+    return res.data;
   },
-  async getScoreboard() {
-    return j<GameResultDto[]>(await fetch('/api/scoreboard', { cache: 'no-store' }));
+  async getScoreboard(): Promise<GameResultDto[]> {
+    const res = await API.get<GameResultDto[]>('/scoreboard');
+    return res.data;
   },
-  async resetScoreboard() {
-    await fetch('/api/scoreboard', { method: 'DELETE' });
+  async resetScoreboard(): Promise<OkDto> {
+    const res = await API.delete<OkDto>('/scoreboard');
+    return res.data;
   },
-  async play(player: number) {
-    return j<GameResultDto>(
-      await fetch('/api/play', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player }),
-      })
-    );
+  async play(player: number): Promise<GameResultDto> {
+    const res = await API.post<GameResultDto>('/play', { player });
+    return res.data;
   },
 };
