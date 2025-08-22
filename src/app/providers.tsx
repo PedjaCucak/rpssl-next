@@ -6,6 +6,7 @@ import { makeStore } from '@/store';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { SnackbarProvider } from 'notistack';
+import { CustomAlert } from '@/components/CustomAlert';
 
 const theme = createTheme({ palette: { mode: 'light' } });
 
@@ -18,6 +19,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           maxSnack={10}
           autoHideDuration={5000}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          Components={{
+            success: CustomAlert,
+            error: CustomAlert,
+            warning: CustomAlert,
+            info: CustomAlert,
+          }}
         >
           <CssBaseline />
           <Provider store={store}>{children}</Provider>
