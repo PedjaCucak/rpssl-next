@@ -10,10 +10,15 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
   const uid = await getOrSetUserId();
 
-  const body = (await req.json().catch(() => ({}))) as Partial<{ player: ChoiceId }>;
+  const body = (await req.json().catch(() => ({}))) as Partial<{
+    player: ChoiceId;
+  }>;
   const player = Number(body.player) as ChoiceId;
-  if (![1,2,3,4,5].includes(player)) {
-    return NextResponse.json({ error: 'Invalid player choice' }, { status: 400 });
+  if (![1, 2, 3, 4, 5].includes(player)) {
+    return NextResponse.json(
+      { error: 'Invalid player choice' },
+      { status: 400 }
+    );
   }
   if (!getChoiceById(player)) {
     return NextResponse.json({ error: 'Unknown choice' }, { status: 400 });

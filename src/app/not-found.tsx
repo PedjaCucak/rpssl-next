@@ -1,19 +1,19 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
 export default function NotFound() {
-  const src = "/icon-192.png";
+  const src = '/icon-192.png';
   return (
     <Container
       maxWidth="sm"
-      sx={{ minHeight: "100%", display: "grid", placeItems: "center" }}
+      sx={{ minHeight: '100%', display: 'grid', placeItems: 'center' }}
     >
       <Stack spacing={2} alignItems="center" textAlign="center">
         <Box
           component="img"
           src={src}
           alt="404 Not Found"
-          sx={{ userSelect: "none", pointerEvents: "none" }}
+          sx={{ userSelect: 'none', pointerEvents: 'none' }}
         />
         <Typography variant="h4" fontWeight={800}>
           404 Not Found
@@ -25,7 +25,7 @@ export default function NotFound() {
           component={Link}
           href="/"
           variant="contained"
-          sx={{ textTransform: "none" }}
+          sx={{ textTransform: 'none' }}
         >
           Go Home
         </Button>

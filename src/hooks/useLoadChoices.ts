@@ -1,7 +1,11 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
-import { fetchChoices, fetchScoreboard, selectChoicesStatus } from '@/store/slices/gameSlice';
+import {
+  fetchChoices,
+  fetchScoreboard,
+  selectChoicesStatus,
+} from '@/store/slices/gameSlice';
 import { useApiErrorHandler } from './useApiErrorHandler';
 
 type Options = {
@@ -20,8 +24,18 @@ export function useLoadChoices(options: Options = {}) {
 
   const load = useCallback(async () => {
     setLoading(true);
-    void dispatch(fetchChoices()).unwrap().catch(handleApiError).finally(() => {setLoading(false)});
-    void dispatch(fetchScoreboard()).unwrap().catch(handleApiError).finally(() => {setLoading(false)});
+    void dispatch(fetchChoices())
+      .unwrap()
+      .catch(handleApiError)
+      .finally(() => {
+        setLoading(false);
+      });
+    void dispatch(fetchScoreboard())
+      .unwrap()
+      .catch(handleApiError)
+      .finally(() => {
+        setLoading(false);
+      });
   }, [dispatch, handleApiError]);
 
   useEffect(() => {

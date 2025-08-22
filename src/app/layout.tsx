@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Providers from "./providers";
-import "./globals.css";
+import type { Metadata } from 'next';
+import Providers from './providers';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "RPSSL",
-  description: "Rock Paper Scissors Spock Lizard",
+  title: 'RPSSL',
+  description: 'Rock Paper Scissors Spock Lizard',
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 import {
   Box,
   Modal,
@@ -9,10 +9,10 @@ import {
   Typography,
   Paper,
   CircularProgress,
-} from "@mui/material";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { emojiFor } from "@/lib/gameIcons";
-import { Outcome, OverlayPhase } from "@/types/ui";
+} from '@mui/material';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { emojiFor } from '@/lib/gameIcons';
+import { Outcome, OverlayPhase } from '@/types/ui';
 
 export interface WinnerOverlayProps {
   open: boolean;
@@ -32,19 +32,19 @@ export const WinnerOverlay: React.FC<WinnerOverlayProps> = ({
   computerName,
 }) => {
   const title =
-    phase === "pending"
-      ? "Computer is choosing…"
-      : outcome === "player"
-      ? "You Win!"
-      : outcome === "computer"
-      ? "You Lose"
-      : "Tie Game";
+    phase === 'pending'
+      ? 'Computer is choosing…'
+      : outcome === 'player'
+        ? 'You Win!'
+        : outcome === 'computer'
+          ? 'You Lose'
+          : 'Tie Game';
 
   const bigIcon = () => {
-    if (phase === "pending") return emojiFor(playerName);
-    if (outcome === "player") return emojiFor(playerName);
-    if (outcome === "computer") return emojiFor(computerName ?? "");
-    return "🤝";
+    if (phase === 'pending') return emojiFor(playerName);
+    if (outcome === 'player') return emojiFor(playerName);
+    if (outcome === 'computer') return emojiFor(computerName ?? '');
+    return '🤝';
   };
 
   return (
@@ -57,10 +57,10 @@ export const WinnerOverlay: React.FC<WinnerOverlayProps> = ({
       <Fade in={open} timeout={{ enter: 150, exit: 120 }}>
         <Box
           sx={{
-            position: "fixed",
+            position: 'fixed',
             inset: 0,
-            display: "grid",
-            placeItems: "center",
+            display: 'grid',
+            placeItems: 'center',
             p: 2,
           }}
         >
@@ -71,12 +71,12 @@ export const WinnerOverlay: React.FC<WinnerOverlayProps> = ({
                 px: 6,
                 py: 5,
                 borderRadius: 4,
-                textAlign: "center",
+                textAlign: 'center',
                 minWidth: 320,
               }}
             >
               <Stack spacing={2} alignItems="center">
-                {phase === "result" ? (
+                {phase === 'result' ? (
                   <EmojiEventsIcon sx={{ fontSize: 40 }} />
                 ) : (
                   <CircularProgress />
@@ -90,26 +90,26 @@ export const WinnerOverlay: React.FC<WinnerOverlayProps> = ({
                   {bigIcon()}
                 </Typography>
 
-                {phase === "pending" ? (
+                {phase === 'pending' ? (
                   <Typography variant="body2" color="text.secondary">
-                    Your move:{" "}
-                    <strong style={{ textTransform: "capitalize" }}>
+                    Your move:{' '}
+                    <strong style={{ textTransform: 'capitalize' }}>
                       {playerName}
                     </strong>
                   </Typography>
-                ) : outcome === "tie" ? (
+                ) : outcome === 'tie' ? (
                   <Typography variant="body2" color="text.secondary">
                     Both chose wisely (or not)…
                   </Typography>
                 ) : (
                   <Typography variant="body2" color="text.secondary">
-                    You:{" "}
-                    <strong style={{ textTransform: "capitalize" }}>
+                    You:{' '}
+                    <strong style={{ textTransform: 'capitalize' }}>
                       {playerName}
-                    </strong>{" "}
+                    </strong>{' '}
                     vs Computer:&nbsp;
-                    <strong style={{ textTransform: "capitalize" }}>
-                      {computerName ?? ""}
+                    <strong style={{ textTransform: 'capitalize' }}>
+                      {computerName ?? ''}
                     </strong>
                   </Typography>
                 )}

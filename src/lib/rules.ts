@@ -9,7 +9,10 @@ export const BEATS: Record<ChoiceId, ChoiceId[]> = {
   5: [1, 3], // spock > rock, scissors
 };
 
-export function judge(player: ChoiceId, computer: ChoiceId): 'win' | 'lose' | 'tie' {
+export function judge(
+  player: ChoiceId,
+  computer: ChoiceId
+): 'win' | 'lose' | 'tie' {
   if (player === computer) return 'tie';
   if (BEATS[player].includes(computer)) return 'win';
   return 'lose';

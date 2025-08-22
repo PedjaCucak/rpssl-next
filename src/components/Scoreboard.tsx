@@ -1,11 +1,11 @@
-"use client";
-import * as React from "react";
-import { useAppDispatch, useAppSelector } from "@/store/storeHooks";
+'use client';
+import * as React from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
 import {
   resetScoreboard,
   selectChoiceNameById,
   selectRecent,
-} from "@/store/slices/gameSlice";
+} from '@/store/slices/gameSlice';
 import {
   Card,
   CardActions,
@@ -20,11 +20,11 @@ import {
   Divider,
   Button,
   Chip,
-} from "@mui/material";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { emojiFor } from "@/lib/gameIcons";
-import { outcomeColor } from "@/lib/gameOutcome";
-import { useApiErrorHandler } from "@/hooks/useApiErrorHandler";
+} from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { emojiFor } from '@/lib/gameIcons';
+import { outcomeColor } from '@/lib/gameOutcome';
+import { useApiErrorHandler } from '@/hooks/useApiErrorHandler';
 
 export const Scoreboard: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ export const Scoreboard: React.FC = () => {
             <span style={{ fontSize: 16, lineHeight: 1 }}>
               {emojiFor(name)}
             </span>
-            <span style={{ textTransform: "capitalize" }}>{name}</span>
+            <span style={{ textTransform: 'capitalize' }}>{name}</span>
           </Stack>
         }
         variant="outlined"
@@ -124,7 +124,7 @@ export const Scoreboard: React.FC = () => {
           </List>
         )}
       </CardContent>
-      <CardActions sx={{ justifyContent: "flex-end" }}>
+      <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button
           size="small"
           startIcon={<RestartAltIcon />}

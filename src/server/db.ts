@@ -29,5 +29,5 @@ export function clearRecent(userId: UserId) {
 }
 
 export function getChoiceById(id: ChoiceId) {
-  return CHOICES.find(c => c.id === id);
+  return CHOICES.find((c) => c.id === id);
 }

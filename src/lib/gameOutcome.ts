@@ -1,11 +1,11 @@
-import { Outcome } from "@/types/ui";
+import { Outcome } from '@/types/ui';
 
 export function outcomeColor(result: string | undefined) {
-  const r = (result ?? "").toLowerCase();
-  if (r.includes("win")) return "success.main";
-  if (r.includes("lose")) return "error.main";
-  if (r.includes("draw") || r.includes("tie")) return "text.secondary";
-  return "text.secondary";
+  const r = (result ?? '').toLowerCase();
+  if (r.includes('win')) return 'success.main';
+  if (r.includes('lose')) return 'error.main';
+  if (r.includes('draw') || r.includes('tie')) return 'text.secondary';
+  return 'text.secondary';
 }
 
 export function detectOutcome(results?: string): Outcome {

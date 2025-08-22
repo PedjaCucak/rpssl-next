@@ -1,7 +1,7 @@
-"use client";
-import * as React from "react";
-import { useAppSelector } from "@/store/storeHooks";
-import { selectChoices, selectPlayStatus } from "@/store/slices/gameSlice";
+'use client';
+import * as React from 'react';
+import { useAppSelector } from '@/store/storeHooks';
+import { selectChoices, selectPlayStatus } from '@/store/slices/gameSlice';
 import {
   Box,
   Button,
@@ -9,8 +9,8 @@ import {
   CardContent,
   Stack,
   Typography,
-} from "@mui/material";
-import { emojiFor } from "@/lib/gameIcons";
+} from '@mui/material';
+import { emojiFor } from '@/lib/gameIcons';
 
 interface GameChoiceGridProps {
   onPick?: (id: number) => void;
@@ -28,8 +28,8 @@ export const GameChoiceGrid: React.FC<GameChoiceGridProps> = ({ onPick }) => {
         </Typography>
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))",
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px,1fr))',
             gap: 2,
           }}
         >
@@ -38,7 +38,7 @@ export const GameChoiceGrid: React.FC<GameChoiceGridProps> = ({ onPick }) => {
               key={c.id}
               variant="contained"
               size="large"
-              disabled={playStatus === "loading"}
+              disabled={playStatus === 'loading'}
               onClick={() => onPick?.(c.id)}
               sx={{ py: 2 }}
             >
@@ -46,7 +46,7 @@ export const GameChoiceGrid: React.FC<GameChoiceGridProps> = ({ onPick }) => {
                 <span style={{ fontSize: 28 }}>{emojiFor(c.name)}</span>
                 <Typography
                   variant="button"
-                  sx={{ textTransform: "capitalize" }}
+                  sx={{ textTransform: 'capitalize' }}
                 >
                   {c.name}
                 </Typography>
